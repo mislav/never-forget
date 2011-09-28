@@ -1,9 +1,9 @@
 module NeverForget
   module Sinatra
     module Helpers
-      def log_error(boom = $!, env = nil)
+      def log_error(boom = $!, env = nil, &block)
         env = request.env if env.nil? and respond_to? :request
-        NeverForget.log(boom, env || {})
+        NeverForget.log(boom, env || {}, &block)
       end
     end
 
