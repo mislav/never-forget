@@ -78,12 +78,12 @@
 
 <% if ex['params'].present? %>
 <h3>Params:</h3>
-<pre class="params"><%== YAML.dump ex['params'] %></pre>
+<pre class="params"><%== y ex['params'] %></pre>
 <% end %>
 
 <% if ex['session'].present? %>
 <h3>Session:</h3>
-<pre class="session"><%== YAML.dump ex['session'] %></pre>
+<pre class="session"><%== y ex['session'] %></pre>
 <% end %>
 
 <h3>Backtrace:</h3>

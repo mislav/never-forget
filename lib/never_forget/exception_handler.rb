@@ -1,6 +1,7 @@
 require 'rbconfig'
 require 'erubis'
 require 'active_support/memoizable'
+require 'yaml'
 
 module NeverForget
   class ExceptionHandler
@@ -44,6 +45,10 @@ module NeverForget
   module TemplateHelpers
     include RbConfig
     extend ActiveSupport::Memoizable
+
+    def y(obj)
+      YAML.dump(obj).sub(/^---.*\n/, '').gsub(/ !(omap|map:BSON::OrderedHash) *$/, '')
+    end
 
     def gem_path
       paths = []
