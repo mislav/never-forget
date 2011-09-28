@@ -8,7 +8,9 @@ module NeverForget
     end
 
     def self.registered(app)
-      app.use NeverForget::ExceptionHandler
+      if :production == app.environment or :staging == app.environment
+        app.use NeverForget::ExceptionHandler
+      end
       app.helpers Helpers
     end
 
