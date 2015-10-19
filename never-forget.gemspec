@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |gem|
   gem.name    = 'never-forget'
-  gem.version = '0.1.1'
+  gem.version = '0.1.2'
   
   gem.add_dependency 'mingo', '>= 0.2'
   gem.add_dependency 'activesupport'
