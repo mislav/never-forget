@@ -72,7 +72,7 @@ module NeverForget
     end
 
     def external_path
-      ['/usr/ruby1.9.2', '/home/heroku_rack', gem_path, system_path].flatten.uniq
+      ['/usr/ruby1.9.2', '/home/heroku_rack', gem_path, system_path].flatten.uniq.map(&:to_s)
     end
     memoize :external_path
 
