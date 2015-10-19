@@ -23,8 +23,16 @@ module NeverForget
 
     def call(env)
       if env['PATH_INFO'] == File.join('/', @options[:list_path])
-        body = render_exceptions_view
-        [200, {'content-type' => 'text/html'}, [body]]
+        begin
+          body = render_exceptions_view
+          [200, {'content-type' => 'text/html'}, [body]]
+        rescue
+          [500, {'content-type' => 'text/plain'}, ["%s: %s\n\n%s" % [
+            $!.class.name,
+            $!.message,
+            $!.backtrace.join("\n")
+          ]]]
+        end
       else
         forward(env)
       end
