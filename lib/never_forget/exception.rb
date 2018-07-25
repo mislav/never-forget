@@ -1,5 +1,4 @@
 require 'mingo'
-require 'active_support/memoizable'
 require 'active_support/core_ext/kernel/singleton_class'
 require 'active_support/core_ext/enumerable'
 require 'active_support/core_ext/hash'
@@ -16,7 +15,6 @@ module NeverForget
       super
     end
 
-    extend ::ActiveSupport::Memoizable
     include ::Mingo::Timestamps
 
     def self.create(error, env)
@@ -101,7 +99,6 @@ module NeverForget
     def tag_modules
       Array(exception.singleton_class.included_modules).map(&:to_s) - KNOWN_MODULES
     end
-    memoize :tag_modules
 
     def unwrap_exception(exception)
       if exception.respond_to?(:original_exception)
@@ -123,7 +120,6 @@ module NeverForget
     def exclude_params
       Array(env['action_dispatch.parameter_filter']).map(&:to_s)
     end
-    memoize :exclude_params
 
     def extract_params
       if params = request.params and params.any?

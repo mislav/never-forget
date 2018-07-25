@@ -1,6 +1,5 @@
 require 'rbconfig'
 require 'erubis'
-require 'active_support/memoizable'
 require 'yaml'
 
 module NeverForget
@@ -52,7 +51,6 @@ module NeverForget
 
   module TemplateHelpers
     include RbConfig
-    extend ActiveSupport::Memoizable
 
     def y(obj)
       YAML.dump(obj).sub(/^---.*\n/, '').gsub(/ !(omap|map:BSON::OrderedHash) *$/, '')
@@ -74,7 +72,6 @@ module NeverForget
     def external_path
       ['/usr/ruby1.9.2', '/home/heroku_rack', gem_path, system_path].flatten.uniq.map(&:to_s)
     end
-    memoize :external_path
 
     def collapse_line?(line)
       external_path.any? {|p| line.start_with? p }
@@ -103,6 +100,5 @@ module NeverForget
       else Dir.pwd
       end
     end
-    memoize :root_path
   end
 end
